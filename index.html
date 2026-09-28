@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARZAN MEDIA</title>
+    <style>
+        :root {
+            --bg-color: #090a0f;
+            --card-bg: rgba(22, 27, 38, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f3f4f6;
+            --text-sub: #9ca3af;
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.25);
+            --accent-gradient: linear-gradient(135deg, #10b981, #059669);
+            --gold: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%);
+            color: var(--text-main);
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 640px;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 12px 18px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 18px;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #fff, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lang-switch button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-sub);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-left: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .lang-switch button.active, .lang-switch button:hover {
+            color: #fff;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn {
+            background: var(--accent-gradient);
+            color: #000;
+            font-weight: 700;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+        }
+
+        .btn-gold:hover {
+            box-shadow: 0 6px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .hero {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 380px;
+            border-radius: 18px;
+            object-fit: cover;
+            object-position: center 20%;
+            border: 1px solid var(--card-border);
+        }
+
+        .hero-text h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-text p {
+            color: var(--text-sub);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--card-border);
+            padding: 12px 14px;
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .social-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            padding: 20px;
+            border-radius: 18px;
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-sub);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .donate-section {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 24px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .donate-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .donate-grid { grid-template-columns: 1fr; }
+        }
+
+        /* MODAL */
+        .modal-backdrop {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            z-index: 100;
+        }
+
+        .modal-backdrop.active { display: block; }
+
+        .modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: #12151e;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 24px;
+            width: 90%;
+            max-width: 450px;
+            display: none;
+            z-index: 101;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal.active { display: block; }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+            padding: 4px;
+            border-radius: 10px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-sub);
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            color: #fff;
+            background: var(--accent);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .qr-image {
+            width: 100%;
+            max-width: 180px;
+            display: block;
+            margin: 0 auto 15px;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        .crypto-address {
+            background: rgba(0,0,0,0.4);
+            padding: 12px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-copy {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 10px;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">TARZAN MEDIA</div>
+        <div class="lang-switch">
+            <button class="active" onclick="setLang('ru', event)">RU</button>
+            <button onclick="setLang('en', event)">EN</button>
+            <button onclick="setLang('vi', event)">VI</button>
+            <button onclick="setLang('zh', event)">ZH</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <img src="13050.jpg" alt="Tarzan Portrait" class="hero-img">
+        <div class="hero-text">
+            <h1>TARZAN MEDIA</h1>
+            <p id="hero-desc">Модель • Инфлюенсер • Фитнес-Тренер • Гид по ЮВА • Дейтинг-Консультант</p>
+            <div class="btn-group">
+                <a href="https://t.me/imzaitsau" target="_blank" class="btn" id="btn-contact">Связаться</a>
+                <a href="#title-contact" class="btn btn-outline" id="btn-socials">Мои соцсети</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title" id="title-services">Направления</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 id="s1-title">Моделинг и Съемки</h3>
+                <p id="s1-desc">Участие в съёмках, модных показах и визуальных проектах для брендов по всей ЮВА.</p>
+            </div>
+            <div class="card">
+                <h3 id="s2-title">Персональный Тренинг & Фитнес</h3>
+                <p id="s2-desc">Индивидуальный подход к форме, составление тренировок и закрытое онлайн-сопровождение.</p>
+            </div>
+            <div class="card">
+                <h3 id="s3-title">Авторский Гид по ЮВА</h3>
+                <p id="s3-desc">Персональные маршруты, сопровождение и локальный опыт в нетуристических местах региона.</p>
+            </div>
+            <div class="card">
+                <h3 id="s4-title">Дейтинг & Консалтинг</h3>
+                <p id="s4-desc">Индивидуальная работа над образом, стилем, подачей и уверенностью в общении.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL MEDIA & CONTACTS SECTION -->
+    <section class="card" style="margin-bottom: 30px;">
+        <h2 id="title-contact" style="font-size: 20px; font-weight: 700; margin-bottom: 8px;">Соцсети и Связь</h2>
+        <p id="contact-text" style="color: var(--text-sub); font-size: 14px; margin-bottom: 20px;">Заходите на платформы или пишите напрямую в Telegram:</p>
+        
+        <div class="social-grid">
+            <a href="https://t.me/imzaitsau" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                Telegram
+            </a>
+            <a href="https://instagram.com/imzaitsau" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Instagram
+            </a>
+            <a href="https://youtube.com/@imzaitsau" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                YouTube
+            </a>
+            <a href="https://tiktok.com/@imzaitsau" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.82.56-1.29 1.54-1.22 2.52.03.88.52 1.7 1.27 2.14.77.46 1.75.52 2.58.18.82-.32 1.48-1.02 1.72-1.87.12-.51.13-1.04.12-1.57V0z"/></svg>
+                TikTok
+            </a>
+            <a href="https://twitch.tv/imzaitsau" target="_blank" class="social-btn">
+                <svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143h-1.715zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+                Twitch
+            </a>
+        </div>
+    </section>
+
+    <!-- DONATION & SUPPORT SECTION -->
+    <section class="donate-section">
+        <h2 class="section-title" id="title-donate">Поддержка и Донаты</h2>
+        <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 15px;" id="donate-desc">
+            Если вам нравится мой контент и вы хотите поддержать проект:
+        </p>
+        <div class="donate-grid">
+            <a href="https://dalink.to/tarzan" target="_blank" class="btn btn-gold" style="width: 100%;">
+                DaLink / Карты
+            </a>
+            <button class="btn btn-outline" onclick="openModal()" style="width: 100%;">
+                Криптовалюта / USDT
+            </button>
+        </div>
+    </section>
+</div>
+
+<!-- DONATION MODAL -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal()"></div>
+<div class="modal" id="donationModal">
+    <div class="modal-header">
+        <h3 id="m-title">Поддержать проект</h3>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('crypto')">Криптовалюта</button>
+        <button class="tab-btn" onclick="switchTab('bank')">DaLink / Банк</button>
+    </div>
+
+    <div class="tab-content active" id="tab-crypto">
+        <img src="1.qr.trust.usdt.trc20.jpg" alt="USDT TRC20 QR" class="qr-image">
+        <div style="margin-bottom: 15px;">
+            <label style="font-size: 12px; color: var(--text-sub); display: block; margin-bottom: 5px;">Сеть: USDT (TRC-20)</label>
+            <div class="crypto-address">
+                <span id="trc20-addr">TP9Y23A4y1724f...</span>
+                <button class="btn-copy" onclick="copyText('trc20-addr')">Копировать</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="tab-bank">
+        <p style="color: var(--text-sub); font-size: 14px; margin-bottom: 15px;">
+            Перевод картой или через сервис DaLink:
+        </p>
+        <a href="https://dalink.to/tarzan" class="btn btn-gold" target="_blank" style="width: 100%; text-align: center; margin-bottom: 10px;">
+            Перейти в DaLink
+        </a>
+        <a href="https://t.me/imzaitsau" class="btn btn-outline" target="_blank" style="width: 100%; text-align: center;">
+            Написать в Telegram
+        </a>
+    </div>
+</div>
+<script>
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+        if(tabName === 'crypto') {
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            document.getElementById('tab-crypto').classList.add('active');
+        } else if(tabName === 'bank') {
+            document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            document.getElementById('tab-bank').classList.add('active');
+        }
+    }
+
+    function openModal() {
+        document.getElementById('modalBackdrop').classList.add('active');
+        document.getElementById('donationModal').classList.add('active');
+    }
+
+    function closeModal() {
+        document.getElementById('modalBackdrop').classList.remove('active');
+        document.getElementById('donationModal').classList.remove('active');
+    }
+
+    function copyText(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Адрес скопирован!');
+            }).catch(() => {
+                fallbackCopy(text);
+            });
+        } else {
+            fallbackCopy(text);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert('Адрес скопирован!');
+        } catch (err) {
+            alert('Не удалось скопировать адрес');
+        }
+        document.body.removeChild(textArea);
+    }
+
+    const translations = {
+        ru: {
+            heroDesc: "Модель • Инфлюенсер • Фитнес-Тренер • Гид по ЮВА • Дейтинг-Консультант",
+            btnContact: "Связаться",
+            btnSocials: "Мои соцсети",
+            titleDonate: "Поддержка и Донаты",
+            donateDesc: "Если вам нравится мой контент и вы хотите поддержать проект:",
+            titleServices: "Направления",
+            s1Title: "Моделинг и Съемки",
+            s1Desc: "Участие в съёмках, модных показах и визуальных проектах для брендов по всей ЮВА.",
+            s2Title: "Персональный Тренинг & Фитнес",
+            s2Desc: "Индивидуальный подход к форме, составление тренировок и закрытое онлайн-сопровождение.",
+            s3Title: "Авторский Гид по ЮВА",
+            s3Desc: "Персональные маршруты, сопровождение и локальный опыт в нетуристических местах региона.",
+            s4Title: "Дейтинг & Консалтинг",
+            s4Desc: "Индивидуальная работа над образом, стилем, подачей и уверенностью в общении.",
+            titleContact: "Соцсети и Связь",
+            contactText: "Заходите на платформы или пишите напрямую в Telegram:",
+            mTitle: "Поддержать проект"
+        },
+        en: {
+            heroDesc: "Model • Influencer • Fitness Trainer • SEA Guide • Dating Consultant",
+            btnContact: "Get in Touch",
+            btnSocials: "My Socials",
+            titleDonate: "Support",
+            donateDesc: "If you enjoy my content and want to support the project:",
+            titleServices: "Focus Areas",
+            s1Title: "Modeling & Shoots",
+            s1Desc: "Campaigns, fashion shows, and visual projects across Southeast Asia.",
+            s2Title: "Personal Training & Fitness",
+            s2Desc: "Custom fitness coaching, tailored plans, and private online guidance.",
+            s3Title: "SEA Travel Guide",
+            s3Desc: "Personalized journeys, guidance, and hidden local spots in the region.",
+            s4Title: "Dating & Style Consulting",
+            s4Desc: "One-on-one coaching for personal image, style, and communication confidence.",
+            titleContact: "Socials & Contact",
+            contactText: "Connect with me on social platforms or write directly via Telegram:",
+            mTitle: "Support the Project"
+        },
+        vi: {
+            heroDesc: "Người mẫu • Influencer • HLV Thể hình • Hướng dẫn viên • Tư vấn Dating",
+            btnContact: "Liên hệ",
+            btnSocials: "Mạng xã hội",
+            titleDonate: "Ủng hộ dự án",
+            donateDesc: "Nếu bạn yêu thích nội dung của tôi và muốn ủng hộ:",
+            titleServices: "Lĩnh vực",
+            s1Title: "Người mẫu & Shoots",
+            s1Desc: "Tham gia các dự án hình ảnh, show thời trang khắp Đông Nam Á.",
+            s2Title: "HLV Thể hình Cá nhân",
+            s2Desc: "Đồng hành 1-1, lập kế hoạch tập luyện và tư vấn riêng.",
+            s3Title: "Hướng dẫn viên SEA",
+            s3Desc: "Lịch trình cá nhân hóa, khám phá các điểm đến độc đáo.",
+            s4Title: "Tư vấn Định hình Phong cách",
+            s4Desc: "Tư vấn 1-1 về phong cách, hình ảnh và sự tự tin.",
+            titleContact: "Mạng xã hội & Liên hệ",
+            contactText: "Kết nối qua các nền tảng hoặc nhắn tin trực tiếp Telegram:",
+            mTitle: "Ủng hộ dự án"
+        },
+        zh: {
+            heroDesc: "模特 • 网红 • 健身教练 • 东南亚向导 • 约会顾问",
+            btnContact: "联系沟通",
+            btnSocials: "社交媒体",
+            titleDonate: "赞助支持",
+            donateDesc: "如果您喜欢我的内容并希望给予支持：",
+            titleServices: "主要领域",
+            s1Title: "模特与拍摄",
+            s1Desc: "参与东南亚地区的品牌拍摄、时装秀与视觉创作。",
+            s2Title: "健身与私人指导",
+            s2Desc: "一对一定制健身计划与私密线上指导。",
+            s3Title: "东南亚私人向导",
+            s3Desc: "定制个人行程，深度体验本地小众路线。",
+            s4Title: "个人形象与社交顾问",
+            s4Desc: "一对一形象打造、风格提升与社交自信指导。",
+            titleContact: "社交媒体与联系方式",
+            contactText: "关注我的社交平台或通过 Telegram 直接沟通：",
+            mTitle: "支持本项目"
+        }
+    };
+
+    function setLang(lang, e) {
+        const t = translations[lang];
+        if(!t) return;
+        document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+        if(e && e.target) e.target.classList.add('active');
+        document.getElementById('hero-desc').innerText = t.heroDesc;
+        document.getElementById('btn-contact').innerText = t.btnContact;
+        document.getElementById('btn-socials').innerText = t.btnSocials;
+        document.getElementById('title-donate').innerText = t.titleDonate;
+        document.getElementById('donate-desc').innerText = t.donateDesc;
+        document.getElementById('title-services').innerText = t.titleServices;
+        document.getElementById('s1-title').innerText = t.s1Title;
+        document.getElementById('s1-desc').innerText = t.s1Desc;
+        document.getElementById('s2-title').innerText = t.s2Title;
+        document.getElementById('s2-desc').innerText = t.s2Desc;
+        document.getElementById('s3-title').innerText = t.s3Title;
+        document.getElementById('s3-desc').innerText = t.s3Desc;
+        document.getElementById('s4-title').innerText = t.s4Title;
+        document.getElementById('s4-desc').innerText = t.s4Desc;
+        document.getElementById('title-contact').innerText = t.titleContact;
+        document.getElementById('contact-text').innerText = t.contactText;
+        document.getElementById('m-title').innerText = t.mTitle;
+    }
+</script>
+</body>
+</html>
+
